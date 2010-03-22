@@ -5,61 +5,20 @@ use strict;
 
 =head1 NAME
 
-File::Format::CRD - The great new File::Format::CRD!
+File::Format::CRD - Distribution for reading the Windows CRD format.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.0.1
 
 =cut
 
-our $VERSION = '0.01';
+our $VERSION = '0.0.1';
 
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
-    use File::Format::CRD;
-
-    my $foo = File::Format::CRD->new();
-    ...
-
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 FUNCTIONS
-
-=head2 function1
-
-=cut
-
-sub function1 {
-}
-
-=head2 function2
-
-=cut
-
-sub function2 {
-}
-
-=head1 AUTHOR
-
-Shlomi Fish, C<< <shlomif at iglu.org.il> >>
-
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-file-format-crd at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=File-Format-CRD>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-
-
+See L<File::Format::CRD::Reader> .
 
 =head1 SUPPORT
 

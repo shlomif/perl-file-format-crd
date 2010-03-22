@@ -7,6 +7,8 @@ use Carp;
 
 use Encode;
 
+use Fcntl qw(SEEK_SET);
+
 =head1 NAME
 
 File::Format::CRD::Reader - read Windows .CRD files.
@@ -30,6 +32,12 @@ our $VERSION = '0.0.1';
         print "Title = " , $card->{'title'}, "\nBody = <<<\n", 
             $card->{'body'}, "\n>>>\n\n";
     }
+
+=head1 METHODS
+
+=head2 File::Format::CRD::Reader->new({filename => $filename});
+
+Open CRD file $filename for reading.
 
 =cut
 
@@ -96,7 +104,7 @@ sub _init
 
     my $filename = $args->{'filename'};
 
-    my $in = open, "<", $filename
+    open my $in, "<", $filename
         or Carp::confess "Could not open '$filename'";
 
     $self->{_fh} = $in;
@@ -117,6 +125,12 @@ sub _init
     return;
 }
 
+=head2 $self->get_num_cards()
+
+Get the number of cards.
+
+=cut
+
 sub get_num_cards
 {
     return shift->{_num_cards};
@@ -126,12 +140,18 @@ sub DESTROY
 {
     my $self = shift;
 
-    $self->end();
+    $self->finish();
 
     return;
 }
 
-sub end
+=head2 $self->finish()
+
+Clean up and finish. Can no longer read cards after that.
+
+=cut
+
+sub finish
 {
     my $self = shift;
 
@@ -145,10 +165,25 @@ sub end
     return;
 }
 
+=head2 $self->get_next_card({encoding => "windows-1255"})
+
+Get the next card. Returns undef or the empty list at the end of the file,
+and a hash-ref like that upon success:
+
+    {
+        'title' => "My Card",
+        'body' => "Body of card\nHello",
+    }
+
+The encoding parameter C<'encoding'> can be used to decode the card using a 
+certain encoding.
+
+=cut
+
 sub get_next_card
 {
     my $self = shift;
-    my $args = shift;
+    my $args = shift || {};
 
     my $encoding = $args->{'encoding'};
 
@@ -173,7 +208,7 @@ sub get_next_card
 
         if (defined($encoding))
         {
-            return decode($encoding, $title);
+            return decode($encoding, $text);
         }
         else
         {
