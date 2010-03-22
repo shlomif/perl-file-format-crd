@@ -3,54 +3,152 @@ package File::Format::CRD::Reader;
 use warnings;
 use strict;
 
+use Carp;
+
 =head1 NAME
 
-File::Format::CRD::Reader - The great new File::Format::CRD::Reader!
+File::Format::CRD::Reader - read Windows .CRD files.
 
 =head1 VERSION
 
-Version 0.01
+Version 0.0.1
 
 =cut
 
-our $VERSION = '0.01';
-
+our $VERSION = '0.0.1';
 
 =head1 SYNOPSIS
 
-Quick summary of what the module does.
-
-Perhaps a little code snippet.
-
     use File::Format::CRD::Reader;
 
-    my $foo = File::Format::CRD::Reader->new();
-    ...
+    my $reader = File::Format::CRD::Reader->new({ filename => $filename});
 
-=head1 EXPORT
-
-A list of functions that can be exported.  You can delete this section
-if you don't export anything, such as for a purely object-oriented module.
-
-=head1 FUNCTIONS
-
-=head2 function1
+    while (my $card = $reader->get_next_card({encoding => "windows-1255"})
+    {
+        print "Title = " , $card->{'title'}, "\nBody = <<<\n", 
+            $card->{'body'}, "\n>>>\n\n";
+    }
 
 =cut
 
-sub function1 {
+sub new
+{
+    my $class = shift;
+
+    my $self = bless {}, $class;
+
+    $self->_init(@_);
+
+    return $self;
 }
 
-=head2 function2
+sub _read_from
+{
+    my ($self, $pos, $count) = @_;
 
-=cut
+    if (!seek($self->{_fh}, $pos, SEEK_SET))
+    {
+        Carp::confess("Cannot seek to $pos.");
+    }
 
-sub function2 {
+    my $buffer = "";
+    if (read($self->{_fh}, $buffer, $count) != $count)
+    {
+        Carp::confess("Could not read $count bytes.");
+    }
+
+    return $buffer;
 }
+
+sub _read_short
+{
+    my $self = shift;
+
+    my $buffer = "";
+
+    if (read($self->{_fh}, $buffer, 2) != 2)
+    {
+        Carp::confess("Could not read a short.");
+    }
+
+    return unpack("v", $buffer);
+}
+
+sub _init
+{
+    my ($self, $args) = @_;
+
+    my $filename = $args->{'filename'};
+
+    my $in = open, "<", $filename
+        or Carp::confess "Could not open '$filename'";
+
+    $self->{_fh} = $in;
+
+    my $magic = $self->_read_from(0, 3);
+
+    if ($magic ne "MGC")
+    {
+        Carp::confess("Could not find magic number in file.");        
+    }
+
+    my $n_cards = $self->_read_short();
+
+    $self->{_num_cards} = $n_cards;
+
+    $self->{_card_idx} = 0;
+
+    return;
+}
+
+sub get_num_cards
+{
+    return shift->{_num_cards};
+}
+
+sub DESTROY
+{
+    my $self = shift;
+
+    $self->end();
+
+    return;
+}
+
+sub end
+{
+    my $self = shift;
+
+    if (exists($self->{_fh}))
+    {
+        close($self->{_fh});
+
+        delete($self->{_fh});
+    }
+
+    return;
+}
+
+sub get_next_card
+{
+    my $self = shift;
+
+    my $card_idx = $self->{_card_idx};
+
+    if ($card_idx == $self->get_num_cards())
+    {
+        return;
+    }
+
+    $self->{_card_idx}++;
+
+    
+}
+
 
 =head1 AUTHOR
 
-Shlomi Fish, C<< <shlomif at iglu.org.il> >>
+Shlomi Fish, L<http://www.shlomifish.org/>
 
 =head1 BUGS
 
