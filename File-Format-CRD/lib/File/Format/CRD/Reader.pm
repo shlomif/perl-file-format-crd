@@ -5,6 +5,8 @@ use strict;
 
 use Carp;
 
+use Encode;
+
 =head1 NAME
 
 File::Format::CRD::Reader - read Windows .CRD files.
@@ -74,6 +76,20 @@ sub _read_short
     return unpack("v", $buffer);
 }
 
+sub _read_long
+{
+    my $self = shift;
+
+    my $buffer = "";
+
+    if (read($self->{_fh}, $buffer, 4) != 4)
+    {
+        Carp::confess("Could not read a long.");
+    }
+
+    return unpack("V", $buffer);
+}
+
 sub _init
 {
     my ($self, $args) = @_;
@@ -132,6 +148,9 @@ sub end
 sub get_next_card
 {
     my $self = shift;
+    my $args = shift;
+
+    my $encoding = $args->{'encoding'};
 
     my $card_idx = $self->{_card_idx};
 
@@ -140,9 +159,40 @@ sub get_next_card
         return;
     }
 
+    my $loc = 11 + $card_idx * 52;
+
+    my $textloc = $self->_read_long($loc);
+
+    if (! ($textloc >= 57))
+    {
+        Carp::confess("textloc is too small");
+    }
+
+    my $transform = sub {
+        my $text = shift;
+
+        if (defined($encoding))
+        {
+            return decode($encoding, $title);
+        }
+        else
+        {
+            return $text;
+        }
+    };
+
+    my $title = $self->_read_from($loc+5, 52-5);
+
+    my $ret = { 'title' => $transform->($title) };
+
+    my $textlen = $self->_read_short($textloc+2);
+
+    my $text = $self->_read_from($textloc+4, $textlen);
+
+    $ret->{'body'} = $transform->($text);
     $self->{_card_idx}++;
 
-    
+    return $ret;
 }
 
 
