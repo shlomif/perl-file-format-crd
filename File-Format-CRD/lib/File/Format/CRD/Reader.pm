@@ -27,7 +27,7 @@ our $VERSION = '0.0.1';
 
     my $reader = File::Format::CRD::Reader->new({ filename => $filename});
 
-    while (my $card = $reader->get_next_card({encoding => "windows-1255"})
+    while (my $card = $reader->get_next_card({encoding => "windows-1255"}))
     {
         print "Title = " , $card->{'title'}, "\nBody = <<<\n", 
             $card->{'body'}, "\n>>>\n\n";
@@ -73,13 +73,9 @@ sub _read_from
 sub _read_short
 {
     my $self = shift;
+    my $pos = shift;
 
-    my $buffer = "";
-
-    if (read($self->{_fh}, $buffer, 2) != 2)
-    {
-        Carp::confess("Could not read a short.");
-    }
+    my $buffer = $self->_read_from($pos, 2);
 
     return unpack("v", $buffer);
 }
@@ -87,15 +83,9 @@ sub _read_short
 sub _read_long
 {
     my $self = shift;
+    my $pos = shift;
 
-    my $buffer = "";
-
-    if (read($self->{_fh}, $buffer, 4) != 4)
-    {
-        Carp::confess("Could not read a long.");
-    }
-
-    return unpack("V", $buffer);
+    return unpack("V", $self->_read_from($pos, 4));
 }
 
 sub _init
@@ -107,6 +97,8 @@ sub _init
     open my $in, "<", $filename
         or Carp::confess "Could not open '$filename'";
 
+    binmode ($in);
+
     $self->{_fh} = $in;
 
     my $magic = $self->_read_from(0, 3);
@@ -116,7 +108,7 @@ sub _init
         Carp::confess("Could not find magic number in file.");        
     }
 
-    my $n_cards = $self->_read_short();
+    my $n_cards = $self->_read_short(3);
 
     $self->{_num_cards} = $n_cards;
 
