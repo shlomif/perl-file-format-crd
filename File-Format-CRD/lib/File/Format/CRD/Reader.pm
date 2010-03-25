@@ -265,9 +265,10 @@ L<http://search.cpan.org/dist/File-Format-CRD/>
 
 =back
 
-
 =head1 ACKNOWLEDGEMENTS
 
+This module is based on L<http://ihaa.com/english/crd2html.html> by
+ihaa.com.
 
 =head1 COPYRIGHT & LICENSE
 
