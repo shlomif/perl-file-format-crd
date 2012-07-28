@@ -1,0 +1,9 @@
+File-Format-CRD/Build
+File-Format-CRD/File-Format-CRD-*
+File-Format-CRD/META.json
+File-Format-CRD/META.yml
+File-Format-CRD/MYMETA.json
+File-Format-CRD/MYMETA.yml
+File-Format-CRD/Makefile.PL
+File-Format-CRD/_build
+File-Format-CRD/blib
