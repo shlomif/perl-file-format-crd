@@ -5,6 +5,7 @@ README
 inc/Test/Run/Builder.pm
 lib/File/Format/CRD.pm
 lib/File/Format/CRD/Reader.pm
+LICENSE
 t/00-load.t
 t/cpan-changes.t
 t/pod-coverage.t

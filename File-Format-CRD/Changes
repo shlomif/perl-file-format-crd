@@ -3,6 +3,8 @@ Revision history for File-Format-CRD
 0.0.2   2014-01-29
         - Specify minimum version of perl (CPANTS Kwalitee).
         - Add t/cpan-changes.t.
+        - Add the LICENSE file (CPANTS Kwalitee).
+        - Add t/style-trailing-space.t .
 
 0.0.1   2010-03-25
         - First version, released on an unsuspecting world.
