@@ -23,6 +23,7 @@ my $builder = Test::Run::Builder->new(
     build_requires => {
         'Test::More' => 0,
     },
+    script_files => [],
     add_to_cleanup      => [ 'File-Format-CRD-*' ],
     create_makefile_pl => 'traditional',
 );

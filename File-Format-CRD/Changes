@@ -5,6 +5,7 @@ Revision history for File-Format-CRD
         - Add t/cpan-changes.t.
         - Add the LICENSE file (CPANTS Kwalitee).
         - Add t/style-trailing-space.t .
+        - Add scripts/bump-version-number.pl
 
 0.0.1   2010-03-25
         - First version, released on an unsuspecting world.
