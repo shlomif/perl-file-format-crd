@@ -31,7 +31,7 @@ our $VERSION = '0.0.1';
 
     while (my $card = $reader->get_next_card({encoding => "windows-1255"}))
     {
-        print "Title = " , $card->{'title'}, "\nBody = <<<\n", 
+        print "Title = " , $card->{'title'}, "\nBody = <<<\n",
             $card->{'body'}, "\n>>>\n\n";
     }
 
@@ -107,7 +107,7 @@ sub _init
 
     if ($magic ne "MGC")
     {
-        Carp::confess("Could not find magic number in file.");        
+        Carp::confess("Could not find magic number in file.");
     }
 
     my $n_cards = $self->_read_short(3);
@@ -169,7 +169,7 @@ and a hash-ref like that upon success:
         'body' => "Body of card\nHello",
     }
 
-The encoding parameter C<'encoding'> can be used to decode the card using a 
+The encoding parameter C<'encoding'> can be used to decode the card using a
 certain encoding.
 
 =cut
