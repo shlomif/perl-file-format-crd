@@ -7,6 +7,12 @@ my $builder = Module::Build->new(
     license             => 'mit',
     dist_author         => q{Shlomi Fish <shlomif@iglu.org.il>},
     dist_version_from   => 'lib/File/Format/CRD.pm',
+    requires => {
+        'Encode' => 0,
+        'perl' => '5.008',
+        'strict' => 0,
+        'warnings' => 0,
+    },
     build_requires => {
         'Test::More' => 0,
     },

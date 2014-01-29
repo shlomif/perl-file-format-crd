@@ -3,6 +3,8 @@ package File::Format::CRD;
 use warnings;
 use strict;
 
+use 5.008;
+
 =head1 NAME
 
 File::Format::CRD - Distribution for reading the Windows CRD format.

@@ -3,6 +3,8 @@ package File::Format::CRD::Reader;
 use warnings;
 use strict;
 
+use 5.008;
+
 use Carp;
 
 use Encode;
