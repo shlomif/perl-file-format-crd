@@ -17,11 +17,13 @@ File::Format::CRD::Reader - read Windows .CRD files.
 
 =head1 VERSION
 
-Version 0.0.1
+Version 0.0.2
 
 =cut
 
-our $VERSION = '0.0.1';
+use vars qw($VERSION);
+
+$VERSION = '0.0.1';
 
 =head1 SYNOPSIS
 
