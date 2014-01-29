@@ -5,6 +5,7 @@ README
 lib/File/Format/CRD.pm
 lib/File/Format/CRD/Reader.pm
 t/00-load.t
+t/cpan-changes.t
 t/pod-coverage.t
 t/pod.t
 Makefile.PL
