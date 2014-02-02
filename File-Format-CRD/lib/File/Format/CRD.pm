@@ -17,7 +17,7 @@ Version 0.0.3
 
 use vars qw($VERSION);
 
-$VERSION = '0.0.2';
+$VERSION = '0.0.3';
 
 
 =head1 SYNOPSIS
