@@ -17,7 +17,7 @@ File::Format::CRD::Reader - read Windows .CRD files.
 
 =head1 VERSION
 
-Version 0.0.2
+Version 0.0.3
 
 =cut
 
