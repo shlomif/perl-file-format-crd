@@ -1,5 +1,9 @@
 Revision history for File-Format-CRD
 
+0.0.4   2015-05-30
+        - Convert the build system to Dist-Zilla.
+            - Improvements such as links to the VCS repositories.
+
 0.0.3   2014-02-02
         - Consistent $VERSION (CPANTS).
 
