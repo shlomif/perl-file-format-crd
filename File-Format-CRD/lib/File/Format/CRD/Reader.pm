@@ -221,7 +221,7 @@ sub get_next_card
     my $text = $self->_read_from($textloc+4, $textlen);
 
     $ret->{'body'} = $transform->($text);
-    $self->{_card_idx}++;
+    ++($self->{_card_idx});
 
     return $ret;
 }
