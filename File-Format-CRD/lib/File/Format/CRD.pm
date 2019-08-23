@@ -11,8 +11,6 @@ File::Format::CRD - Distribution for reading the Windows CRD format.
 
 =cut
 
-our $VERSION = 'v0.0.4';
-
 =head1 SYNOPSIS
 
 See L<File::Format::CRD::Reader> .
