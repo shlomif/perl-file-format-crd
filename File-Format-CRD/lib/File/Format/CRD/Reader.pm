@@ -223,44 +223,6 @@ sub get_next_card
 
 Shlomi Fish, L<http://www.shlomifish.org/>
 
-=head1 BUGS
-
-Please report any bugs or feature requests to C<bug-file-format-crd at rt.cpan.org>, or through
-the web interface at L<http://rt.cpan.org/NoAuth/ReportBug.html?Queue=File-Format-CRD>.  I will be notified, and then you'll
-automatically be notified of progress on your bug as I make changes.
-
-
-
-
-=head1 SUPPORT
-
-You can find documentation for this module with the perldoc command.
-
-    perldoc File::Format::CRD::Reader
-
-
-You can also look for information at:
-
-=over 4
-
-=item * RT: CPAN's request tracker
-
-L<http://rt.cpan.org/NoAuth/Bugs.html?Dist=File-Format-CRD>
-
-=item * AnnoCPAN: Annotated CPAN documentation
-
-L<http://annocpan.org/dist/File-Format-CRD>
-
-=item * CPAN Ratings
-
-L<http://cpanratings.perl.org/d/File-Format-CRD>
-
-=item * Search CPAN
-
-L<http://search.cpan.org/dist/File-Format-CRD/>
-
-=back
-
 =head1 ACKNOWLEDGEMENTS
 
 This module is based on L<http://ihaa.com/english/crd2html.html> by
@@ -270,7 +232,7 @@ ihaa.com.
 
 Copyright 2010 Shlomi Fish.
 
-This program is distributed under the MIT (X11) License:
+This program is distributed under the MIT (Expat) License:
 L<http://www.opensource.org/licenses/mit-license.php>
 
 Permission is hereby granted, free of charge, to any person
@@ -293,7 +255,6 @@ HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
 WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
 OTHER DEALINGS IN THE SOFTWARE.
-
 
 =cut
 

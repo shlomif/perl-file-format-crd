@@ -1,5 +1,8 @@
 Revision history for File-Format-CRD
 
+0.2.2       2020-10-17
+    - Remove stale POD.
+
 0.2.1       2020-10-17
     - dist.ini / weaver.ini / .tidyallrc / etc. cleanup
         - Move to @SHLOMIF
